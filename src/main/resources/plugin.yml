@@ -1,0 +1,6 @@
+name: Timber
+version: 1.0.0-SNAPSHOT
+main: io.moatwel.minecraft.timber.Timber
+api-version: 1.16
+prefix: Timber
+authors: [halu5071]
