@@ -5,18 +5,16 @@ import org.bukkit.block.Block
 import org.bukkit.entity.Player
 import kotlin.math.absoluteValue
 
-class PlayerRangeRule : BlockBreakRule {
-
-    companion object {
-        private const val RANGE_LIMIT = 10
-    }
+class PlayerRangeRule(
+    private val breakRangeLimit: Int
+) : BlockBreakRule {
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
         val playerLocation = player.location
         val blockLocation = block.location
 
-        val isXInRange = (playerLocation.blockX - blockLocation.blockX).absoluteValue <= RANGE_LIMIT
-        val isZInRange = (playerLocation.blockZ - blockLocation.blockZ).absoluteValue <= RANGE_LIMIT
+        val isXInRange = (playerLocation.blockX - blockLocation.blockX).absoluteValue <= breakRangeLimit
+        val isZInRange = (playerLocation.blockZ - blockLocation.blockZ).absoluteValue <= breakRangeLimit
 
         return isXInRange && isZInRange
     }

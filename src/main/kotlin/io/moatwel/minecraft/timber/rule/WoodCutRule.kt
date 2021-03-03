@@ -19,7 +19,6 @@ class WoodCutRule internal constructor(builder: Builder) : BlockBreakRule {
 
     class Builder {
         internal val rules: MutableList<BlockBreakRule> = mutableListOf(
-            PlayerRangeRule(),
             PlayerLocationRule()
         )
 
