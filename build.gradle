@@ -1,6 +1,7 @@
 buildscript {
     ext {
         kotlin_version = "1.4.30"
+        kotest_version = "4.4.1"
     }
     repositories {
         mavenCentral()
@@ -38,12 +39,19 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    testImplementation "io.kotest:kotest-runner-junit5-jvm:$kotest_version"
+    testImplementation "io.kotest:kotest-assertions-core:$kotest_version"
 }
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
         filter ReplaceTokens, tokens: [version: version]
     }
+}
+
+test {
+    useJUnitPlatform()
 }
 
 jar {
