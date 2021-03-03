@@ -23,11 +23,7 @@ class BlockBreakListener(
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
-        val mainItem = event.player.inventory.itemInMainHand
         val block = event.block
-        logger.info("onBlockBreak: X: ${event.block.x}, Y: ${event.block.y}, Z: ${event.block.z}, block: ${event.block}")
-        logger.info("onBlockBreak: block: $block, data: ${block.blockData}")
-        logger.info("onBlockBreak: item: $mainItem, type: ${mainItem.type}")
 
         woodCutter.cut(block.world, event.player, block)
     }
