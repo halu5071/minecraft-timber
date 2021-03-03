@@ -5,7 +5,7 @@ import org.bukkit.World
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
 
-class WoodMaterialRule : BlockBreakRule {
+class WoodLogMaterialRule : BlockBreakRule {
 
     companion object {
         // TODO: Config 化する
