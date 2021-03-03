@@ -1,0 +1,2 @@
+should_break_leaves: true
+x_z_break_range_limit: 10
