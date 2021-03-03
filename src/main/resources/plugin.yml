@@ -1,5 +1,5 @@
 name: Timber
-version: 1.0.0-SNAPSHOT
+version: @version@
 main: io.moatwel.minecraft.timber.Timber
 api-version: 1.16
 prefix: Timber
