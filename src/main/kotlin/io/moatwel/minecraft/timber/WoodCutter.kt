@@ -1,23 +1,14 @@
 package io.moatwel.minecraft.timber
 
-import io.moatwel.minecraft.timber.rule.PlayerLocationRule
-import io.moatwel.minecraft.timber.rule.PlayerRangeRule
-import io.moatwel.minecraft.timber.rule.BlockBreakRule
+import io.moatwel.minecraft.timber.rule.WoodCutRule
 import org.bukkit.World
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
 
-class WoodCutter constructor(builder: Builder) {
-
-    private val rules = builder.rules
+class WoodCutter(private val woodCutRule: WoodCutRule) {
 
     fun cut(world: World, player: Player, block: Block) {
-        var canAccept = true
-        rules.forEach { rule ->
-            val result = rule.canAccept(world, player, block)
-            canAccept = canAccept && result
-        }
-
+        val canAccept = woodCutRule.canAccept(world, player, block)
         if (canAccept.not()) return
 
         val mainItem = player.inventory.itemInMainHand
@@ -32,22 +23,6 @@ class WoodCutter constructor(builder: Builder) {
                     cut(world, player, targetBlock)
                 }
             }
-        }
-    }
-
-    class Builder {
-        val rules = mutableListOf(
-            PlayerRangeRule(),
-            PlayerLocationRule()
-        )
-
-        fun addRule(rule: BlockBreakRule): Builder {
-            rules.add(rule)
-            return this
-        }
-
-        fun build(): WoodCutter {
-            return WoodCutter(this)
         }
     }
 }

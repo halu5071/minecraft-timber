@@ -16,9 +16,8 @@ class PlayerRangeRule : BlockBreakRule {
         val blockLocation = block.location
 
         val isXInRange = (playerLocation.blockX - blockLocation.blockX).absoluteValue <= RANGE_LIMIT
-        val isYInRange = (playerLocation.blockY - blockLocation.blockY).absoluteValue <= RANGE_LIMIT
         val isZInRange = (playerLocation.blockZ - blockLocation.blockZ).absoluteValue <= RANGE_LIMIT
 
-        return isXInRange && isYInRange && isZInRange
+        return isXInRange && isZInRange
     }
 }
