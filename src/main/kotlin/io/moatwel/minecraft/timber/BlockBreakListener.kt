@@ -1,6 +1,6 @@
 package io.moatwel.minecraft.timber
 
-import io.moatwel.minecraft.timber.rule.WoodLogMaterialRule
+import io.moatwel.minecraft.timber.rule.InitialBlockBreakRule
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
@@ -10,7 +10,7 @@ class BlockBreakListener(
     private val woodCutter: WoodCutter
 ) : Listener {
 
-    private val woodMaterialRule = WoodLogMaterialRule()
+    private val initialBlockBreakRule = InitialBlockBreakRule()
 
     companion object {
         @JvmStatic
@@ -27,7 +27,7 @@ class BlockBreakListener(
         val world = block.world
         val player = event.player
 
-        if (woodMaterialRule.canAccept(world, player, block).not()) return
+        if (initialBlockBreakRule.canAccept(world, player, block).not()) return
 
         woodCutter.cut(block.world, event.player, block)
     }

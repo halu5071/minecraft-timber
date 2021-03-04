@@ -5,20 +5,23 @@ import org.bukkit.World
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
 
-class WoodLogMaterialRule : BlockBreakRule {
+class InitialBlockBreakRule : BlockBreakRule {
 
     companion object {
-        private val targetWoodList = arrayListOf(
+        private val targetBlockList = arrayListOf(
             Material.OAK_LOG,
             Material.DARK_OAK_LOG,
             Material.ACACIA_LOG,
             Material.JUNGLE_LOG,
             Material.SPRUCE_LOG,
             Material.BIRCH_LOG,
+
+            Material.WARPED_STEM,
+            Material.CRIMSON_STEM,
         )
     }
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
-        return targetWoodList.contains(block.type)
+        return targetBlockList.contains(block.type)
     }
 }
