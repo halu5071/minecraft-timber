@@ -19,7 +19,7 @@ plugins {
 import org.apache.tools.ant.filters.ReplaceTokens
 
 group = 'io.moatwel.minecraft'
-version = '1.0.0'
+version = '1.0.1'
 
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
