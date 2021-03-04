@@ -1,7 +1,9 @@
 package io.moatwel.minecraft.timber
 
 import io.moatwel.minecraft.timber.config.ServerConfig
+import io.moatwel.minecraft.timber.logger.TimberLogger
 import io.moatwel.minecraft.timber.rule.BlockBreakRuleGroup
+import io.moatwel.minecraft.timber.rule.FungusMaterialRule
 import io.moatwel.minecraft.timber.rule.LeavesMaterialRule
 import io.moatwel.minecraft.timber.rule.PlayerItemRule
 import io.moatwel.minecraft.timber.rule.PlayerRangeRule
@@ -13,6 +15,8 @@ class Timber : JavaPlugin() {
 
     override fun onEnable() {
         super.onEnable()
+
+        TimberLogger.plant(this)
 
         saveDefaultConfig()
 
@@ -34,10 +38,12 @@ class Timber : JavaPlugin() {
             materialRuleGroup
                 .addRule(WoodLogMaterialRule())
                 .addRule(LeavesMaterialRule())
+                .addRule(FungusMaterialRule())
         } else {
             // Do not add LeavesMaterialRule()
             materialRuleGroup
                 .addRule(WoodLogMaterialRule())
+                .addRule(FungusMaterialRule())
         }
 
         val breakRangeLimit = serverConfig.getXZBreakRangeLimit()
