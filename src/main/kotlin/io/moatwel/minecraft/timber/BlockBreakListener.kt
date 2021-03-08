@@ -1,22 +1,23 @@
 package io.moatwel.minecraft.timber
 
-import io.moatwel.minecraft.timber.rule.InitialBlockBreakRule
+import io.moatwel.minecraft.timber.rule.BlockBreakRule
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.plugin.java.JavaPlugin
 
 class BlockBreakListener(
-    private val woodCutter: WoodCutter
+    private val woodCutter: WoodCutter,
+    private val initialBlockBreakRule: BlockBreakRule
 ) : Listener {
-
-    private val initialBlockBreakRule = InitialBlockBreakRule()
 
     companion object {
         @JvmStatic
-        fun register(plugin: JavaPlugin, woodCutter: WoodCutter) {
+        fun register(plugin: JavaPlugin,
+                     woodCutter: WoodCutter,
+                     initialBlockBreakRule: BlockBreakRule) {
             plugin.server.pluginManager.registerEvents(
-                BlockBreakListener(woodCutter),
+                BlockBreakListener(woodCutter, initialBlockBreakRule),
                 plugin)
         }
     }

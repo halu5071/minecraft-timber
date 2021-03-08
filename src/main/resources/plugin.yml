@@ -4,3 +4,9 @@ main: io.moatwel.minecraft.timber.Timber
 api-version: 1.16
 prefix: Timber
 authors: [halu5071]
+
+commands:
+  timber:
+    description: Base command
+    usage: /<command>
+    aliases: [tm, ti]
