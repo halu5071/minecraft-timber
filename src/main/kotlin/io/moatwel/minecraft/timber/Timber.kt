@@ -1,14 +1,9 @@
 package io.moatwel.minecraft.timber
 
-import io.moatwel.minecraft.timber.config.ServerConfig
+import io.moatwel.minecraft.timber.command.TimberCommand
 import io.moatwel.minecraft.timber.logger.TimberLogger
-import io.moatwel.minecraft.timber.rule.BlockBreakRuleGroup
-import io.moatwel.minecraft.timber.rule.FungusMaterialRule
-import io.moatwel.minecraft.timber.rule.LeavesMaterialRule
-import io.moatwel.minecraft.timber.rule.PlayerItemRule
-import io.moatwel.minecraft.timber.rule.PlayerRangeRule
+import io.moatwel.minecraft.timber.rule.InitialBlockBreakRule
 import io.moatwel.minecraft.timber.rule.WoodCutRule
-import io.moatwel.minecraft.timber.rule.WoodLogMaterialRule
 import org.bukkit.plugin.java.JavaPlugin
 
 class Timber : JavaPlugin() {
@@ -20,38 +15,11 @@ class Timber : JavaPlugin() {
 
         saveDefaultConfig()
 
-        val woodCutRule = createWoodCutRule()
+        val woodCutRule = WoodCutRule.create(this)
+        val initialRule = InitialBlockBreakRule(this)
 
-        BlockBreakListener.register(this, WoodCutter(woodCutRule))
-    }
+        BlockBreakListener.register(this, WoodCutter(woodCutRule), initialRule)
 
-    private fun createWoodCutRule(): WoodCutRule {
-        val serverConfig = ServerConfig(this)
-
-        val woodCutRuleBuilder = WoodCutRule.Builder()
-        woodCutRuleBuilder
-            .addRule(PlayerItemRule())
-
-        val materialRuleGroup = BlockBreakRuleGroup.Builder()
-
-        if (serverConfig.shouldBreakLeaves()) {
-            materialRuleGroup
-                .addRule(WoodLogMaterialRule())
-                .addRule(LeavesMaterialRule())
-                .addRule(FungusMaterialRule())
-        } else {
-            // Do not add LeavesMaterialRule()
-            materialRuleGroup
-                .addRule(WoodLogMaterialRule())
-                .addRule(FungusMaterialRule())
-        }
-
-        val breakRangeLimit = serverConfig.getXZBreakRangeLimit()
-        woodCutRuleBuilder
-            .addRule(PlayerRangeRule(breakRangeLimit))
-
-        woodCutRuleBuilder.addRule(materialRuleGroup.build())
-
-        return woodCutRuleBuilder.build()
+        TimberCommand.register(this)
     }
 }

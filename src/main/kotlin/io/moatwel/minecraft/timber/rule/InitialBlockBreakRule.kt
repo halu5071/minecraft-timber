@@ -1,11 +1,15 @@
 package io.moatwel.minecraft.timber.rule
 
+import io.moatwel.minecraft.timber.config.isEnabledPlugin
 import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.block.Block
 import org.bukkit.entity.Player
+import org.bukkit.plugin.java.JavaPlugin
 
-class InitialBlockBreakRule : BlockBreakRule {
+class InitialBlockBreakRule(
+    private val plugin: JavaPlugin
+) : BlockBreakRule {
 
     companion object {
         private val targetBlockList = arrayListOf(
@@ -22,6 +26,9 @@ class InitialBlockBreakRule : BlockBreakRule {
     }
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
-        return targetBlockList.contains(block.type)
+        val isTargetBlock = targetBlockList.contains(block.type)
+        val isEnabledPlugin = player.isEnabledPlugin(plugin)
+
+        return isTargetBlock && isEnabledPlugin
     }
 }

@@ -7,14 +7,9 @@ class ServerConfig(
 ) {
 
     companion object {
-        private const val SHOULD_BREAK_LEAVES = "should_break_leaves"
         private const val X_Z_BREAK_RANGE_LIMIT = "x_z_break_range_limit"
 
         private const val DEFAULT_RANGE_LIMIT = 5
-    }
-
-    fun shouldBreakLeaves(): Boolean {
-        return plugin.config.getBoolean(SHOULD_BREAK_LEAVES)
     }
 
     fun getXZBreakRangeLimit(): Int {
