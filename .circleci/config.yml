@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: circleci/openjdk:8u265
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}
+      - run:
+          name: Cleanup
+          command: ./gradlew clean
+      - run:
+          name: Assemble
+          command: ./gradlew assemble
+      - run:
+          name: Unit Test
+          command: ./gradlew test
