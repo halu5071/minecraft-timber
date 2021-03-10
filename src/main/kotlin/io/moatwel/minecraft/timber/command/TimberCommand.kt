@@ -4,6 +4,7 @@ import io.moatwel.minecraft.timber.config.disableLeavesBreak
 import io.moatwel.minecraft.timber.config.disablePlugin
 import io.moatwel.minecraft.timber.config.enableLeavesBreak
 import io.moatwel.minecraft.timber.config.enablePlugin
+import io.moatwel.minecraft.timber.config.isEnabledPlugin
 import io.moatwel.minecraft.timber.config.shouldBreakLeaves
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -36,7 +37,8 @@ class TimberCommand(
         when (args.getOrNull(0)) {
             TARGET_LEAVE -> handleLeaves(sender, args.getOrNull(1))
             ON,
-            OFF -> handlePlugin(sender, args.getOrNull(0))
+            OFF,
+            STATUS -> handlePlugin(sender, args.getOrNull(0))
             else -> help(sender)
         }
 
@@ -59,6 +61,10 @@ class TimberCommand(
             OFF -> {
                 sender.disablePlugin(plugin)
                 sender.sendMessages("[Timber] Plugin: OFF")
+            }
+            STATUS -> {
+                val status = sender.isEnabledPlugin(plugin)
+                sender.sendMessages("[Timber] Plugin: ${if (status) "ON" else "OFF"}")
             }
             else -> help(sender)
         }
@@ -91,6 +97,10 @@ class TimberCommand(
 
     private fun help(sender: CommandSender) {
         sender.sendMessage(
-            "[Timber] No Help 8-((((")
+            """
+            [Timber] usage:
+                timber [on/off/status]
+                timber leave [on/off/status]
+            """.trimIndent())
     }
 }
