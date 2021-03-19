@@ -112,5 +112,20 @@ class TimberCommandTest : ShouldSpec() {
                 }
             }
         }
+
+        context("Version display") {
+            readyExtensions()
+            every { mockPlugin.description.version }.returns("1.0.0")
+
+            val args = arrayOf("version")
+
+            should("be called Player.sendMessages() with specific string") {
+                command.onCommand(mockSender, mockCommand, "", args)
+
+                verify(exactly = 1) {
+                    mockSender.sendMessages("[Timber] version: 1.0.0")
+                }
+            }
+        }
     }
 }
