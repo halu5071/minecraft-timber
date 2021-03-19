@@ -36,12 +36,7 @@ class WoodCutRule internal constructor(builder: Builder) : BlockBreakRule {
     }
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
-        var canAccept = true
-        rules.forEach { rule ->
-            val result = rule.canAccept(world, player, block)
-            canAccept = canAccept && result
-        }
-        return canAccept
+        return rules.all { rule -> rule.canAccept(world, player, block) }
     }
 
     class Builder {
