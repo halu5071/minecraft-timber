@@ -24,30 +24,23 @@ class WoodCutRule internal constructor(builder: Builder) : BlockBreakRule {
                 .addRule(WoodLogMaterialRule())
                 .addRule(LeavesMaterialRule(plugin))
                 .addRule(FungusMaterialRule())
+            woodCutRuleBuilder.addRule(materialRuleGroup.build())
 
             val breakRangeLimit = serverConfig.getXZBreakRangeLimit()
             woodCutRuleBuilder
                 .addRule(PlayerRangeRule(breakRangeLimit))
-
-            woodCutRuleBuilder.addRule(materialRuleGroup.build())
+                .addRule(PlayerLocationRule())
 
             return woodCutRuleBuilder.build()
         }
     }
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
-        var canAccept = true
-        rules.forEach { rule ->
-            val result = rule.canAccept(world, player, block)
-            canAccept = canAccept && result
-        }
-        return canAccept
+        return rules.all { rule -> rule.canAccept(world, player, block) }
     }
 
     class Builder {
-        internal val rules: MutableList<BlockBreakRule> = mutableListOf(
-            PlayerLocationRule()
-        )
+        internal val rules: MutableList<BlockBreakRule> = mutableListOf()
 
         fun addRule(rule: BlockBreakRule): Builder {
             rules.add(rule)
