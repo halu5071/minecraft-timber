@@ -14,6 +14,7 @@ class PlayerItemRule : BlockBreakRule {
             Material.IRON_AXE,
             Material.GOLDEN_AXE,
             Material.DIAMOND_AXE,
+            Material.NETHERITE_AXE
         )
     }
 
