@@ -15,7 +15,7 @@ class PlayerItemRule : BlockBreakRule {
                 Material.GOLDEN_AXE,
                 Material.DIAMOND_AXE,
                 Material.NETHERITE_AXE
-        )
+                )
     }
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
