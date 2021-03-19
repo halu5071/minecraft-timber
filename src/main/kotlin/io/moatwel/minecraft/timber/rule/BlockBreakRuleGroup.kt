@@ -9,12 +9,7 @@ class BlockBreakRuleGroup(builder: Builder) : BlockBreakRule {
     private val rules = builder.rules
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
-        var canAccept = false
-        rules.forEach { rule ->
-            val result = rule.canAccept(world, player, block)
-            canAccept = canAccept || result
-        }
-        return canAccept
+        return rules.any { rule -> rule.canAccept(world, player, block) }
     }
 
     class Builder {
