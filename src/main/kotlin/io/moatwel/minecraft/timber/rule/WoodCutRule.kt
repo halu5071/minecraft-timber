@@ -28,6 +28,7 @@ class WoodCutRule internal constructor(builder: Builder) : BlockBreakRule {
             val breakRangeLimit = serverConfig.getXZBreakRangeLimit()
             woodCutRuleBuilder
                 .addRule(PlayerRangeRule(breakRangeLimit))
+                .addRule(PlayerLocationRule())
 
             woodCutRuleBuilder.addRule(materialRuleGroup.build())
 
@@ -40,9 +41,7 @@ class WoodCutRule internal constructor(builder: Builder) : BlockBreakRule {
     }
 
     class Builder {
-        internal val rules: MutableList<BlockBreakRule> = mutableListOf(
-            PlayerLocationRule()
-        )
+        internal val rules: MutableList<BlockBreakRule> = mutableListOf()
 
         fun addRule(rule: BlockBreakRule): Builder {
             rules.add(rule)
