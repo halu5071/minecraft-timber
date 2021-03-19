@@ -15,7 +15,7 @@ class WoodCutRuleTest : ShouldSpec() {
                 override fun canAccept(world: World, player: Player, block: Block) = true
             }
             val mockRule2 = object : BlockBreakRule {
-                override fun canAccept(world: World, player: Player, block: Block): Boolean = true
+                override fun canAccept(world: World, player: Player, block: Block) = true
             }
 
             val group = WoodCutRule.Builder()
@@ -35,7 +35,7 @@ class WoodCutRuleTest : ShouldSpec() {
                 override fun canAccept(world: World, player: Player, block: Block) = false
             }
             val mockRule2 = object : BlockBreakRule {
-                override fun canAccept(world: World, player: Player, block: Block): Boolean = true
+                override fun canAccept(world: World, player: Player, block: Block) = true
             }
 
             val group = WoodCutRule.Builder()
@@ -55,7 +55,7 @@ class WoodCutRuleTest : ShouldSpec() {
                 override fun canAccept(world: World, player: Player, block: Block) = false
             }
             val mockRule2 = object : BlockBreakRule {
-                override fun canAccept(world: World, player: Player, block: Block): Boolean = false
+                override fun canAccept(world: World, player: Player, block: Block) = false
             }
 
             val group = WoodCutRule.Builder()

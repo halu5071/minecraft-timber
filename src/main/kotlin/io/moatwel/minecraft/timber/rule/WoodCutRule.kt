@@ -24,13 +24,12 @@ class WoodCutRule internal constructor(builder: Builder) : BlockBreakRule {
                 .addRule(WoodLogMaterialRule())
                 .addRule(LeavesMaterialRule(plugin))
                 .addRule(FungusMaterialRule())
+            woodCutRuleBuilder.addRule(materialRuleGroup.build())
 
             val breakRangeLimit = serverConfig.getXZBreakRangeLimit()
             woodCutRuleBuilder
                 .addRule(PlayerRangeRule(breakRangeLimit))
                 .addRule(PlayerLocationRule())
-
-            woodCutRuleBuilder.addRule(materialRuleGroup.build())
 
             return woodCutRuleBuilder.build()
         }
