@@ -74,8 +74,15 @@ class TimberCommand(
     }
 
     private fun handleVersion(sender: CommandSender) {
+        if ((sender is Player).not()) {
+            sender.sendMessage("You do not have permission.")
+            return
+        }
+
+        sender as Player
+
         val version = plugin.description.version
-        sender.sendMessage("[Timber] version: $version")
+        sender.sendMessages("[Timber] version: $version")
     }
 
     private fun handleLeaves(sender: CommandSender, arg1: String?) {
