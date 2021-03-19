@@ -10,6 +10,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.plugin.PluginDescriptionFile
 import org.bukkit.plugin.java.JavaPlugin
 
 class TimberCommand(
@@ -23,6 +24,7 @@ class TimberCommand(
         private const val ON = "on"
         private const val OFF = "off"
         private const val STATUS = "status"
+        private const val VERSION = "version"
 
         fun register(plugin: JavaPlugin) {
             plugin.getCommand(COMMAND)?.setExecutor(TimberCommand(plugin))
@@ -39,6 +41,7 @@ class TimberCommand(
             ON,
             OFF,
             STATUS -> handlePlugin(sender, args.getOrNull(0))
+            VERSION -> handleVersion(sender)
             else -> help(sender)
         }
 
@@ -68,6 +71,11 @@ class TimberCommand(
             }
             else -> help(sender)
         }
+    }
+
+    private fun handleVersion(sender: CommandSender) {
+        val version = plugin.description.version
+        sender.sendMessage("[Timber] version: $version")
     }
 
     private fun handleLeaves(sender: CommandSender, arg1: String?) {
@@ -101,6 +109,7 @@ class TimberCommand(
             [Timber] usage:
                 timber [on/off/status]
                 timber leave [on/off/status]
+                timber version
             """.trimIndent())
     }
 }
