@@ -9,13 +9,13 @@ class PlayerItemRule : BlockBreakRule {
 
     companion object {
         private val allowedItems = arrayListOf(
-                Material.WOODEN_AXE,
-                Material.STONE_AXE,
-                Material.IRON_AXE,
-                Material.GOLDEN_AXE,
-                Material.DIAMOND_AXE,
-                Material.NETHERITE_AXE
-                )
+            Material.WOODEN_AXE,
+            Material.STONE_AXE,
+            Material.IRON_AXE,
+            Material.GOLDEN_AXE,
+            Material.DIAMOND_AXE,
+            Material.NETHERITE_AXE
+        )
     }
 
     override fun canAccept(world: World, player: Player, block: Block): Boolean {
